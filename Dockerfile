@@ -38,8 +38,10 @@ RUN set -eux && \
     curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash && \
     dnf upgrade -y && \
     dnf update -y && \
+    groupadd -g 1000 -r nginx && \
+    useradd -u 1000 -r -g nginx -G root -s /sbin/nologin -d /var/cache/nginx -c "nginx user"  nginx && \
     dnf module reset php nodejs && \
-    dnf module install php:remi-7.4 nginx:1.18 nodejs:12 -y && \
+    dnf module install php:remi-7.4 nginx:1.20 nodejs:12 -y && \
     REPOLIST="baseos,appstream,epel,mariadb-main,extras,remi-modular,remi-safe" && \
     INSTALL_PKGS="nginx \
     php74-php-bcmath \
@@ -74,7 +76,6 @@ RUN set -eux && \
     --setopt=install_weak_deps=False \
     --best \
     ${INSTALL_PKGS} && \
-    usermod -a -G root nginx && \
     dnf -y clean all && \
     rm -rf /var/cache/yum /var/lib/yum/yumdb/* /usr/lib/udev/hwdb.d/* && \
     rm -rf /var/cache/dnf /etc/udev/hwdb.bin /root/.pki && \
@@ -83,14 +84,16 @@ RUN set -eux && \
     chgrp -R 0 /etc/nginx/ /etc/php-fpm.d/ /etc/php-fpm.conf && \
     chmod -R g=u /etc/nginx/ /etc/php-fpm.d/ /etc/php-fpm.conf && \
     mkdir -p /var/lib/php/{session,wsdlcache} && \    
-    mkdir -p /var/lib/php/session /opt/framework && \
+    mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
     composer require laravel/jetstream && \
     php artisan jetstream:install inertia && \
     npm install && \
+    npm install vuex@next --save && \
+    npm install axios && \
     touch /opt/framework/.firstrun && \
-    chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun && \
+    chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun /var/cache/nginx && \
     rm -rf /var/lib/mysql/* && \
     chgrp -R 0 /var/lib/php/{session,wsdlcache}/ && \
     chmod -R g=u /var/lib/php/{session,wsdlcache}/ && \    
@@ -101,11 +104,11 @@ RUN set -eux && \
     rm -rf /var/lib/mysql/* && \
     chown --quiet -R nginx. /var/lib/mysql
 
-COPY --chown=998:0 ["conf/etc/", "/etc/"]
+COPY --chown=1000:0 ["conf/etc/", "/etc/"]
 
-COPY --chown=998:0 ["framework/", "/opt/framework/"]
+COPY --chown=1000:0 ["framework/", "/opt/framework/"]
 
-COPY --chown=998:0 ["db/gb1.sql", "/var/lib/mysql/"]
+COPY --chown=1000:0 ["db/gb1.sql", "/var/lib/mysql/"]
 
 EXPOSE 8080/TCP
 EXPOSE 3306/TCP
@@ -116,7 +119,7 @@ WORKDIR /opt/framework
 
 COPY --chmod=755 ["docker-entrypoint.sh", "/usr/bin/"]
 
-USER 997
+USER 1000
 
 VOLUME ["/opt/framework", "/var/lib/mysql"]
 

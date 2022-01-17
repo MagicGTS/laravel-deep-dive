@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class PhpinfoController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $data = phpinfo();
-        return Inertia::render('Custom/PhpInfo', ['data' => $data]);
+        ob_start();
+        phpinfo();
+        $data = ob_get_contents();
+        ob_clean();
+
+        return response()->json(["raw" => $data]);
+
     }
 }
