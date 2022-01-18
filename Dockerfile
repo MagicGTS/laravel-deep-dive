@@ -92,6 +92,7 @@ RUN set -eux && \
     npm install && \
     npm install vuex@next --save && \
     npm install axios && \
+    npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
     touch /opt/framework/.firstrun && \
     chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun /var/cache/nginx && \
     rm -rf /var/lib/mysql/* && \
@@ -112,8 +113,11 @@ COPY --chown=1000:0 ["db/gb1.sql", "/var/lib/mysql/"]
 
 EXPOSE 8080/TCP
 EXPOSE 3306/TCP
+EXPOSE 3000/TCP
+EXPOSE 3001/TCP
 
 ENV CLIENT_HOST=localhost
+ENV CONTAINER_HOST=localhost
 
 WORKDIR /opt/framework
 
