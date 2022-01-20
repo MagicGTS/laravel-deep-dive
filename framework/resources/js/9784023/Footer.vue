@@ -23,27 +23,8 @@
 </template>
 <style lang="less" scoped>
 
-/* Variables */
-/* Colors */
-@text_fs: 0.75em;
-@text_lh: 0.875em;
-@text_w: normal;
-@text_ls: normal;
-@color_01: #67697e;
-@color_02: #6f7185;
-@color_04: #269eb7;
-@color_05: #ecf0f3;
-@color_06: #94cfdb;
-@color_10: #ecf0f3;
-@color_13: #269eb7;
-@color_white: #ffffff;
-
-.fonts(@fs: @text_fs; @lh: @text_lh; @w: @text_w; @ls: @text_ls) {
-  font-size: @fs;
-  line-height: @lh;
-  font-weight: @w;
-  letter-spacing: @ls;
-}
+@import (less) '../../css/colors.less';
+@import (less) '../../css/common.less';
 .btn {
   &-rnd_lb {
     @btn_h: 1.2em;
@@ -85,37 +66,6 @@
     }
   }
   }
-.header {
-  background-color: @color_10;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: @color_05;
-  width: 100%;
-  & .ribbon-top {
-    padding-left: 0;
-    margin-left: 0;
-  }
-  .contacts {
-    & p {
-      margin: 0 0 0.5em 0;
-      padding-top: 0.5em;
-      padding-bottom: 0.2em;
-      color: @color_01;
-      .fonts();
-      text-align: right;
-      &:nth-child(2) {
-        .fonts(1.5em; 0.4em; 700);
-        color: @color_04;
-
-        &:hover {
-          color: @color_06;
-          transition: 500ms;
-        }
-      }
-    }
-  }
-}
 
 .footer {
   &-top-ribbon {
