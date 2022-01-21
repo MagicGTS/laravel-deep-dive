@@ -1,17 +1,19 @@
 <template>
-    <app-layout title="Обучение по охране труда">
-        <template #header>
-        </template>
-    </app-layout>
+  <app-layout :title="title">
+    <template #header> </template>
+  </app-layout>
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
-    import AppLayout from '@/Layouts/AppLayout.vue'
+import { defineComponent } from "vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
 
-    export default defineComponent({
-        components: {
-            AppLayout,
-        },
-    })
+export default defineComponent({
+  props: {
+    title: String,
+  },
+  components: {
+    AppLayout,
+  },
+});
 </script>

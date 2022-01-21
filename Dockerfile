@@ -87,7 +87,7 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream && \
+    composer require laravel/jetstream symfony/yaml && \
     php artisan jetstream:install inertia && \
     npm install && \
     npm install vuex@next --save && \
