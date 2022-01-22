@@ -1,5 +1,5 @@
 <template>
-  <app-layout :title="title">
+  <app-layout :title="title" :menu="menu">
     <template #header> </template>
   </app-layout>
 </template>
@@ -11,6 +11,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 export default defineComponent({
   props: {
     title: String,
+    menu: Array,
   },
   components: {
     AppLayout,
