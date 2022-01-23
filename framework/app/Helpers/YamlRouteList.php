@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Arr;
 
-function YamlRouteRegister(array $menu, array &$result, array $parent = [])
+function YamlRouteList(array $menu, array &$result, array $parent = [])
 {
     if (empty($parent)) {
         $parent = [""];
@@ -14,7 +14,7 @@ function YamlRouteRegister(array $menu, array &$result, array $parent = [])
     $result[] = array_merge(Arr::except($menu, ['items']), ['reference' => $path]);
     if (array_key_exists('items', $menu)) {
         foreach ($menu['items'] as $item) {
-            YamlRouteRegister($item, $result, $parent);
+            YamlRouteList($item, $result, $parent);
         }
     }
 }

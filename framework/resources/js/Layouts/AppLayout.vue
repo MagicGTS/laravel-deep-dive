@@ -1,6 +1,6 @@
 <template>
-  <Head :title="title" />
-  <Header :menu="menu"/>
+  <Head :title="title" :display="display" />
+  <Header :menu="menu" />
   <Footer />
 </template>
 <script>
@@ -12,6 +12,7 @@ import Footer from "@/9784023/Footer.vue";
 export default defineComponent({
   props: {
     title: String,
+    display: String,
     menu: Array,
   },
 

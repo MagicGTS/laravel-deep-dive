@@ -17,25 +17,22 @@ use Symfony\Component\Yaml\Yaml;
 
 $yamlMenu = Yaml::parse(file_get_contents(base_path() . '/resources/js/menu.yaml'));
 $menu = [];
-YamlRouteRegister($yamlMenu, $menu);
+YamlRouteList($yamlMenu, $menu);
 
 foreach ($menu as $item) {
     Route::get($item['reference'], function () use ($item, $menu) {
         return Inertia::render($item['component'], [
             'title' => $item['title'],
-            'menu' => $menu
+            'menu' => $menu,
+            'display' => array_key_exists('display', $item) ? $item['display'] : $item['title']
         ]);
     })->name($item['component']);
 }
-/* Route::get('/', function () {
-return Inertia::render('Index', [
-'canLogin' => Route::has('login'),
-'canRegister' => Route::has('register'),
-'laravelVersion' => Application::VERSION,
-'phpVersion' => PHP_VERSION,
-'title' => "Обучение по охране труда",
-]);
-}); */
+Route::get('/location', function () {
+    return Inertia::render('Index', [
+        'title' => "Как нас найти",
+    ]);
+})->name('Location');;
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
