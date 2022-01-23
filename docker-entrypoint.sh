@@ -38,6 +38,7 @@ if [ -f "/opt/framework/.firstrun" ]; then
     /usr/bin/mysqld_safe --socket /tmp/mysql &
     npm run dev
     php artisan migrate
+	composer dump-autoload
     /usr/bin/mysqladmin -u root --protocol=SOCKET --socket=/tmp/mysql shutdown
     rm -f /opt/framework/.firstrun
 fi
