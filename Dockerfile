@@ -92,7 +92,7 @@ RUN set -eux && \
     npm install && \
     npm install vuex@next --save && \
     npm install axios && \
-    npm install -D less less-loader && \
+    npm install -D less less-loader laravel-mix-alias && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
     touch /opt/framework/.firstrun && \
     chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun /var/cache/nginx && \

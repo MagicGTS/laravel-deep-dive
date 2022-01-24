@@ -17,7 +17,6 @@
 </style>
 <script>
 import { defineComponent } from "vue";
-import { Link } from "@inertiajs/inertia-vue3";
 import NavLink from "@/9784023/Fragments/NavLink.vue";
 
 export default defineComponent({
@@ -25,7 +24,6 @@ export default defineComponent({
     menu: Array,
   },
   components: {
-    Link,
     NavLink,
   },
 });

@@ -1,5 +1,6 @@
 let state = {
-    phpinfo: ""
+    phpinfo: "",
+    sitemap:{}
 }
 
 export default state

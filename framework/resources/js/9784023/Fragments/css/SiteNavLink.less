@@ -1,0 +1,16 @@
+@import (less) "~css/colors.less";
+@import (less) "~css/common.less";
+.site_nav {
+    &_link {
+        text-decoration: none;
+        /* (@size: @textBaseSize; @lHeight: @textBaseLineHeight; @weight: @textBaseWeight; @ls: @textLS) */
+        .fonts();
+        color: @color_white;
+
+        &:hover {
+            transition: 500ms;
+            color: @color_07;
+            text-decoration: underline;
+        }
+    }
+}

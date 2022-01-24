@@ -1,9 +1,9 @@
 <template>
-  <section class="map"><img :src="require('../../../img/ymap.png').default"></section>
+  <section class="map"><img src="img/ymap.png"></section>
 </template>
 
 <style lang="less" scoped>
-@import (less) "css/Search.less";
+@import (less) "css/YandexMap.less";
 </style>
 <script>
 import { defineComponent } from "vue";

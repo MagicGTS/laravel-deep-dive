@@ -28,12 +28,17 @@ foreach ($menu as $item) {
         ]);
     })->name($item['component']);
 }
-Route::get('/location', function () {
+ Route::get('/location', function () {
     return Inertia::render('Index', [
         'title' => "Как нас найти",
     ]);
-})->name('Location');;
+})->name('Location');
 
+Route::get('/stub', function () {
+    return Inertia::render('Index', [
+        'title' => "Не реализовано",
+    ]);
+})->name('Stub'); 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');

@@ -1,20 +1,30 @@
-@import (less) "@/../css/buttons.less";
+@import (less) "~css/common.less";
+@import (less) "~css/buttons.less";
 .contacts {
-    & p {
-        margin: 0 0 0.5em 0;
-        padding-top: 0.5em;
-        padding-bottom: 0.2em;
-        color: @color_01;
-        .fonts();
-        text-align: right;
+    & address {
+        font-style: normal;
     }
-    .phone_link {
-        .fonts(1.5em; 0.4em; 700);
-        color: @color_04;
-
+    & h1 {
+        .fonts(2.5em; 0.4em; 700;-0.02em;);
+        color: @color_07;
+    }
+    & h2 {
+        .fonts(1.5em; 0.4em; 700;-0.02em;);
+        color: @color_07;
+        margin-top: 2em;
+    }
+    & p,
+    a {
+        .fonts(1em;1.1em;400;-0.02em;);
+        color: @color_07;
+        text-decoration: none;
+    }
+    a {
         &:hover {
-            color: @color_06;
             transition: 500ms;
+            color: @color_06;
+            text-decoration: underline;
+            font-weight: 700;
         }
     }
 }

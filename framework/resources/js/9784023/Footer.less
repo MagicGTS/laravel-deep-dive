@@ -1,0 +1,48 @@
+@import (less) "~css/colors.less";
+@import (less) "~css/common.less";
+
+.footer {
+    background-color: @color_10;
+    align-items: center;
+    background-color: @color_05;
+    width: 100%;
+    &-ribbon {
+        &-top {
+            &-wrap {
+                & .contacts_big {
+                    max-width: 32%;
+                    padding-right: 5em;
+                }
+                & .ya_map {
+                }
+                display: flex;
+                flex-wrap: wrap;
+                padding-right: 0;
+            }
+        }
+        &-midle {
+            &-wrap {
+                padding-top: 2.5em;
+                display: flex;
+                flex-wrap: wrap;
+                background-color: @color_04;
+                justify-content: space-between;
+                & .column {
+                    max-width: 33.33%;
+                    & h2 {
+                        color: @color_white;
+                        .fonts(1em;1.125em;500;-0.02em;);
+                    }
+                    &-logo {
+                        padding-top: 3em;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1510px) {
+    .footer-ribbon-top .contacts.contacts_big {
+        max-width: 100%;
+    }
+}

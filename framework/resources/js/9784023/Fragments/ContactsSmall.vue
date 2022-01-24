@@ -1,13 +1,11 @@
 <template>
   <section class="contacts">
-    <p>Единый бесплатный номер</p>
-    <p class="phone_link">8 (800) 201-16-70</p>
-    <p class="btn_place">
-      <span class="btn-rnd_lb">
-        <a href class="btn-rnd_lb__link">
-          <span class="btn-rnd_lb__text">Обратный звонок</span>
+    <p class="caption">Единый бесплатный номер</p>
+    <a class="phone_link" href="tel:+78002011670">8 (800) 201-16-70</a>
+    <p class="button">
+        <a href class="btn_rnd_lw__link">
+          <span class="btn_rnd_lw__text">Обратный звонок</span>
         </a>
-      </span>
     </p>
   </section>
 </template>
