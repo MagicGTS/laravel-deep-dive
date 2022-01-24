@@ -6,7 +6,7 @@
     </p>
     <p class="location_link">
       <Link :href="route('Location')">
-        <svg width="10" height="10">
+        <svg width="0.625rem" height="0.625rem">
           <use href="img/arrow-location.svg#arrow" />
         </svg>
         Посмотреть на карте

@@ -1,0 +1,25 @@
+@import (less) "~css/colors.less";
+@import (less) "~css/common.less";
+.newsubscription {
+    &-form {
+        width: 13.4375rem;
+        & > * {
+            display: block;
+            float: left;
+            height: 2.5rem;
+        }
+    }
+    &__input {
+        border: none;
+        padding-left: 1rem;
+    }
+    &__btn {
+        padding: 0.75rem;
+        background-color: @color_04;
+        color: @color_white;
+    }
+    & h2 {
+        color: @color_04;
+        .fonts(1em;1.1875em;);
+    }
+}

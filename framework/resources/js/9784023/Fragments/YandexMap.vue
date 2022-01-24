@@ -1,5 +1,5 @@
 <template>
-  <section class="map"><img src="img/ymap.png"></section>
+  <section class="map"></section>
 </template>
 
 <style lang="less" scoped>
