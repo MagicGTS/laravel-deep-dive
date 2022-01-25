@@ -15,7 +15,8 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ])
+    ]).sourceMaps(true, 'source-map') 
+    .vue()
     .webpackConfig(require('./webpack.config'));
 mix.copy('resources/img', 'public/img', false);
 if (mix.inProduction()) {

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\CourcesController;
+
 use Illuminate\Http\Request;
 
 /*
@@ -19,5 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('sitemap', [SitemapController::class, 'index']);
+Route::get('cources', [CourcesController::class, 'index']);
+
 
 //Route::get('phpinfo', [PhpinfoController::class, 'show']);

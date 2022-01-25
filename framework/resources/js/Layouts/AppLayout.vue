@@ -1,6 +1,9 @@
 <template>
   <Head :title="title" :display="display" />
   <Header :menu="menu" />
+  <main>
+    <slot></slot>
+  </main>
   <Footer />
 </template>
 <script>

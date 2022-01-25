@@ -1,0 +1,106 @@
+@import (less) "~css/colors.less";
+@import (less) "~css/common.less";
+.slider-course {
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: @color_06;
+    padding-top: 1.5em;
+    padding-bottom: 8em;
+    &-wrap > * {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 1.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    &__header {
+        & .phones-email {
+            text-align: right;
+            & p {
+                color: @color_white;
+                margin: 0;
+                padding-top: 0.1em;
+                padding-bottom: 0.1em;
+            }
+            & .phone {
+                .fonts(1.2em; 1.1em; 700);
+            }
+            & .email {
+                .fonts(0.8em; 1em);
+                margin-top: 0.4em;
+            }
+            & .phone,
+            .email {
+                & a {
+                    &:hover {
+                        transition: 500ms;
+                        color: @color_06;
+                    }
+                }
+            }
+        }
+    }
+    &__content {
+        height: 45.9375em;
+    }
+    &__selector {
+        float: right;
+        margin-top: -2em;
+
+        & .selector {
+            width: 0.9375rem;
+            height: 0.9375rem;
+            border-radius: 0.46875rem;
+            background-color: @color_white;
+            position: relative;
+            margin-right: 0.55rem;
+            display: inline-block;
+            &:hover:after {
+                width: 0.5625rem;
+                height: 0.5625rem;
+                border-radius: 0.28125rem;
+                left: 0.1875rem;
+                top: 0.1875rem;
+                background-color: @color_06;
+                position: absolute;
+                content: "";
+            }
+        }
+
+        & .active:after {
+            width: 0.5625rem;
+            height: 0.5625rem;
+            border-radius: 0.28125rem;
+            left: 0.1875rem;
+            top: 0.1875rem;
+            background-color: @color_04;
+            position: absolute;
+            content: "";
+        }
+    }
+    &__button {
+        margin-bottom: 1.5em;
+        & .btn-sqr_dl {
+            &__link {
+                padding: 0.5em 1rem;
+                background-color: transparent;
+                border-style: solid;
+                border-color: @color_white;
+                border-width: 0.001rem;
+                border-radius: 0.2rem;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: @color_04;
+                    border-color: @color_04;
+                    transition: 500ms;
+                }
+            }
+            &__text {
+                color: @color_white;
+                .fonts(1em;1.1875em;700);
+            }
+        }
+    }
+}

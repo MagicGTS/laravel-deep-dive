@@ -23,6 +23,16 @@ let actions = {
                 console.log(err);
             });
     },
+    getCources({ commit }) {
+        axios
+            .get("/api/cources")
+            .then((res) => {
+                commit("GET_COURCES", res.data.raw);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },
 };
 
 export default actions;

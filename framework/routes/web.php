@@ -28,7 +28,20 @@ foreach ($menu as $item) {
         ]);
     })->name($item['component']);
 }
- Route::get('/location', function () {
+
+$yamlMenu = Yaml::parse(file_get_contents(base_path() . '/resources/js/SliderCources.yaml'));
+$menu = [];
+YamlRouteList($yamlMenu, $menu);
+foreach ($menu as $item) {
+    Route::get($item['reference'], function () use ($item) {
+        return Inertia::render($item['component'], [
+            'title' => $item['title'],
+            'display' => array_key_exists('display', $item) ? $item['display'] : $item['title'],
+        ]);
+    })->name($item['component']);
+}
+
+Route::get('/location', function () {
     return Inertia::render('Index', [
         'title' => "Как нас найти",
     ]);

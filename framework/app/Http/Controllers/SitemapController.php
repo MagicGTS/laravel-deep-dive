@@ -14,7 +14,6 @@ class SitemapController extends Controller
         $section = $request->query('section');
 
         YamlRouteList($yamlMenu, $menu, [], $section);
-
         return response()->json(["raw" => $menu]);
 
     }

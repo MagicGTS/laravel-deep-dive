@@ -1,0 +1,18 @@
+@import (less) "~css/colors.less";
+@import (less) "~css/common.less";
+.slider{
+        &__text {
+            margin-right: 1rem;
+            &  /deep/ p {
+                color: @color_white;
+                .fonts(4rem; 4.6875rem; 700);
+                margin-bottom: 0;
+                margin-top: 0;
+                max-width: 36.3rem;
+
+                & .small {
+                    .fonts(0.8em; 1.4em; 700);
+                }
+            }
+        }
+}

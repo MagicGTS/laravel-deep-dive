@@ -1,0 +1,24 @@
+title: 'Каталог курсов'
+reference: 'cources'
+component: Stub
+items:
+    -
+        title: 'Охране труда при работе на высоте'
+        display: '<p>Обучение по&nbsp;охране&nbsp;труда <span class="small">при&nbsp;работе&nbsp;на&nbsp;высоте</span></p>'
+        img: 
+            src: 'img/Group%202519.png'
+            height: 496px
+            width: 485px
+        background: img/Frame%201514.png
+        reference: 'stub'
+        component: Stub
+    -
+        title: '2Охране труда при работе на высоте'
+        display: '<p>Обучение&nbsp;ДОПОГ, БДД </p>'
+        img: 
+            src: 'img/dopog.png'
+            height: 496px
+            width: 485px
+        background: img/gps-glonass-slezhenie-za-opasnymi-gruzami.png
+        reference: 'stub'
+        component: Stub
