@@ -2,15 +2,17 @@
 @import (less) "~css/common.less";
 .newsubscription {
     &-form {
+        margin-top: 0.5em;
+        display: flex;
+        height: 2.5rem;
         width: 13.4375rem;
         & > * {
             display: block;
-            float: left;
-            height: 2.5rem;
         }
     }
     &__input {
-        border: none;
+        border-style: solid;
+        border-color: transparent;
         padding-left: 1rem;
     }
     &__btn {
@@ -20,6 +22,6 @@
     }
     & h2 {
         color: @color_04;
-        .fonts(1em;1.1875em;);
+        .fonts(1em;1.3em;);
     }
 }

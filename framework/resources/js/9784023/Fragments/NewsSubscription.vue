@@ -8,7 +8,7 @@
         class="newsubscription__input"
         placeholder="Введите ваш e-mail"
       />
-      <Link :href="route('Stub')" class="newsubscription__btn clear-fix">
+      <Link :href="route('Stub')" class="newsubscription__btn">
         <svg width="1.125rem" height="1.125rem">
           <use xlink:href="img/message.svg#message" />
         </svg>
