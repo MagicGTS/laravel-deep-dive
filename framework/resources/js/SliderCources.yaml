@@ -13,7 +13,7 @@ items:
         reference: 'stub'
         component: Stub
     -
-        title: '2Охране труда при работе на высоте'
+        title: 'Обучение ДОПОГ, БДД'
         display: '<p>Обучение&nbsp;ДОПОГ, БДД </p>'
         img: 
             src: 'img/dopog.png'

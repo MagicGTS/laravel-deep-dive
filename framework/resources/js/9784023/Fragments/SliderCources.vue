@@ -41,12 +41,14 @@
 import { defineComponent } from "vue";
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { Link } from "@inertiajs/inertia-vue3";
+import AppLogo from "@/9784023/Fragments/Logo.vue";
 import SliderCource from "@/9784023/Fragments/SliderCource.vue";
 
 export default defineComponent({
   components: {
     Link,
     SliderCource,
+    AppLogo,
   },
   mounted() {
     this.$store.dispatch("getCources");
