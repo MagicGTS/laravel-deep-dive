@@ -1,0 +1,43 @@
+@import (less) "./common.less";
+@import (less) "./colors.less";
+.btn {
+    &-rnd_lb {
+        @btn_h: 1.2em;
+        @lh: 1em;
+        @fs: 0.9em;
+        @bor_th: 0.001rem;
+        @color_t: @color_white;
+        @color_back: @color_04;
+        @color_t__focus: @color_white;
+        @color_back_focus: @color_06;
+        @bor_rad: 0.4rem;
+        @pad_txt: 0.6em 1.1rem;
+        height: @btn_h;
+        display: inline-block;
+        & a {
+            text-decoration: none;
+            padding: @pad_txt;
+        }
+
+        &__text {
+            color: @color_t;
+            .fonts(@fs; @lh; 500; normal);
+        }
+
+        &__link {
+            display: inline;
+            background-color: @color_back;
+            position: relative;
+            border-radius: @bor_rad;
+
+            &:hover {
+                transition: 100ms;
+                background-color: @color_back_focus;
+
+                & .btn-rnd_lb__text {
+                    color: @color_t__focus;
+                }
+            }
+        }
+    }
+}

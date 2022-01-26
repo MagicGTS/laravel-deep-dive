@@ -87,12 +87,12 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream && \
+    composer require laravel/jetstream symfony/yaml && \
     php artisan jetstream:install inertia && \
     npm install && \
     npm install vuex@next --save && \
     npm install axios && \
-    npm install -D less less-loader && \
+    npm install -D less less-loader laravel-mix-alias && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
     touch /opt/framework/.firstrun && \
     chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun /var/cache/nginx && \
