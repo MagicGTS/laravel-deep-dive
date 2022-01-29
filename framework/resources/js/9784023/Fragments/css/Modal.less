@@ -1,0 +1,140 @@
+@import (less) "~css/colors.less";
+@import (less) "~css/common.less";
+//
+// Variables
+@space: 2.5rem;
+// ----------------------
+
+// Mixin for transition/transform
+.translate(@x; @y) {
+  -webkit-transform: translate(@x, @y);
+      -ms-transform: translate(@x, @y); // IE9+
+          transform: translate(@x, @y);
+}
+.transition(@transition) {
+  -webkit-transition: @transition;
+          transition: @transition;
+}
+.transition-transform(@transition) {
+  -webkit-transition: -webkit-transform @transition;
+     -moz-transition: -moz-transform @transition;
+       -o-transition: -o-transform @transition;
+          transition: transform @transition;
+}
+
+//
+// Btn 
+// ----------------------
+
+.btn{
+  background: @color_06;
+  border: @color_04 solid .001rem;
+  border-radius: .1875rem;
+  color: #fff;
+  display: inline-block;
+  font-size: .875em;
+  padding: .5em .9375rem;
+  text-decoration: none;
+  text-align: center;
+  min-width: 3.75rem;
+  position: relative;
+  transition: color .1s ease;
+  
+  &:hover{
+    background: @color_04;
+  }
+  
+  &.btn-big{
+    font-size: 1.125em;
+    padding: .9375em 1.25rem;
+    min-width: 6.25rem;
+  }
+  
+}
+
+.btn-close{
+  color: @color_02;
+  font-size: 1.875em;
+  text-decoration: none;
+  line-height: 0.6em;
+  
+  &:hover{
+     color: darken(@color_02, 10%);
+  }
+  
+}
+
+//
+// Modal
+// ----------------------
+
+.modal{
+   
+  // This is modal bg
+  &:before{
+    content: ""; 
+    display: none;
+    background: rgba(0,0,0,.6);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0; 
+    z-index: 10;
+  }
+  &__open{
+     
+    // Active animate in modal
+    &:before{
+      display: block;
+    }  
+    .modal-dialog{
+      .translate(0, 0); 
+      top: 20%;  
+    }
+     
+  }
+  
+}
+
+// Modal Dialog
+// ----------------------
+
+.modal-dialog{
+  background: @color_05;
+  border: @color_08 solid .001rem;
+  border-radius: .3125rem;
+  margin-left: -12.5rem;
+  position: fixed;
+  padding: 0.5em 0.5rem;
+  left: 50%; 
+  top: -100%;  
+  z-index: 11; 
+  width: 360px;
+  .translate(0, -500%);
+  .transition-transform(~"0.3s ease-out");
+}
+
+.modal-body{
+  padding: 0.5em 0.5rem;
+}
+
+.modal-header,
+.modal-footer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-header{
+  border-bottom: @color_12 solid .001rem;
+  padding-bottom: 0.5em;
+  
+  h2{
+    font-size: 1.25rem;
+    line-height: 1.5em;
+  }
+  
+}
+
+.modal-footer{
+  border-top: @color_12 solid .001rem;
+  padding-top: 0.5em;
+  text-align: right;
+}
