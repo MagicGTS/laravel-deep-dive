@@ -88,6 +88,7 @@ RUN set -eux && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
     composer require laravel/jetstream symfony/yaml && \
+	composer require barryvdh/laravel-debugbar –dev && \
     php artisan jetstream:install inertia && \
     npm install && \
     npm install vuex@next --save && \
