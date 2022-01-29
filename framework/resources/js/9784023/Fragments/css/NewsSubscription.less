@@ -19,6 +19,16 @@
         padding: 0.75rem;
         background-color: @color_04;
         color: @color_white;
+        &_disabled {
+            background-color: @color_12;
+            border-color: @color_08;
+            pointer-events: none;
+            cursor: default;
+        }
+        &:hover {
+            background-color: @color_06;
+            transition: 500ms;
+        }
     }
     & h2 {
         color: @color_04;
