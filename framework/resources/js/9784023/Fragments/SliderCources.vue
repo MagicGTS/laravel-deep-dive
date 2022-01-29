@@ -61,9 +61,6 @@ export default defineComponent({
   computed: {
     ...mapGetters(["active_cource"]),
     ...mapState({ cources: "cources" }),
-    background_url: function (state, getters) {
-      return "url(" + getters.active_cource.background + ")";
-    },
   },
 });
 </script>
