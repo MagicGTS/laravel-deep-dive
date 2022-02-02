@@ -5,7 +5,7 @@
       <img
         :src="cource.img.src"
         alt=""
-        :style="{ width: cource.img.width, height: cource.img.height }"
+        :style="style"
     /></Link>
   </div>
 </template>
@@ -23,6 +23,14 @@ export default defineComponent({
   },
   props: {
     cource: Object,
+  },
+  computed: {
+    style() {
+      return { 
+        width: (this.cource.img.width? this.cource.img.width: '30.3125rem'),
+        height: (this.cource.img.height? this.cource.img.height: '31rem')
+      }
+    },
   },
 });
 </script>

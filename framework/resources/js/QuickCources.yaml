@@ -1,0 +1,33 @@
+title: 'УЦ Амулет - Быстрый выбор курсов'
+display: 'Быстрый выбор курсов'
+reference: ''
+component: Cources
+items:
+    -
+        title: 'Охрана Труда'
+        reference: stub
+        component: Stub
+        description: 'Обучениепо охране труда для руководителей и специалистов'
+        img: 
+            src: 'img/ico_ОХРАНА ТРУДА.png'
+    -
+        title: 'ПТМ'
+        reference: stub
+        component: Stub
+        description: 'Обучение по пожарно-техническому минимуму'
+        img: 
+            src: 'img/ico_ПТМ.png'
+    -
+        title: 'ПТЭЭП'
+        reference: stub
+        component: Stub
+        description: 'Обучение по электробезопасносности, ПТЭЭП'
+        img: 
+            src: 'img/ico_ОХРАНА ТРУДА.png'
+    -
+        title: 'ДОПОГ'
+        reference: stub
+        component: Stub
+        description: 'Обучение водителей перевозке различных видов опасных грузов'
+        img: 
+            src: 'img/ico_ДОПОГ.png'

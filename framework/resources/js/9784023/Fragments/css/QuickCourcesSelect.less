@@ -1,0 +1,62 @@
+@import (less) "~css/common.less";
+@import (less) "~css/colors.less";
+@import (css) "../../../../css/hamburgers.css";
+.quickcources {
+  mpading-bottom: 2em;
+  background-color: @color_05;
+    &__list {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    &-wrap {
+        & h2 {
+            .fonts(2.5em;2.9375em;700;-0.05em);
+        }
+        & h3 {
+          .fonts(1em;1.1875rem;700);
+          color: @color_04;
+          display: block;
+          float: right;
+        }
+    }
+    &__item {
+        margin-bottom: 1em;
+        margin-right: 1rem;
+        &:nth-child(4n + 2) {
+            & :deep(.cource-small-card) {
+                background-color: @color_02;
+                & .btn-sqr2_dl__link:hover {
+                    background-color: @color_08;
+                }
+                &:hover {
+                    background-color: @color_12;
+                }
+            }
+        }
+        &:nth-child(4n + 3) {
+            & :deep(.cource-small-card) {
+                background-color: @color_06;
+                & .btn-sqr2_dl__link:hover {
+                    background-color: @color_06;
+                }
+                &:hover {
+                    background-color: @color_04;
+                }
+            }
+        }
+        &:nth-child(4n) {
+            & :deep(.cource-small-card) {
+                background-color: @color_09;
+                & .btn-sqr2_dl__link:hover {
+                    background-color: @color_14;
+                }
+                &:hover {
+                    background-color: @color_13;
+                }
+            }
+        }
+    }
+}

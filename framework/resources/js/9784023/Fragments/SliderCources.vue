@@ -1,11 +1,19 @@
 <template>
-  <section class="slider-course" v-if="cources.isLoaded" :style="{backgroundImage:`url(${active_cource.background})`}" >
+  <section
+    class="slider-course"
+    v-if="cources.isLoaded"
+    :style="{ backgroundImage: `url(${active_cource.background})` }"
+  >
     <div class="slider-course-wrap wrap padding-global">
       <section class="slider-course__header">
         <app-logo />
         <section class="phones-email clear-fix">
-          <p class="phone"><a href="tel:+74959784023">+7 (495) 978-40-23</a></p>
-          <p class="phone"><a href="tel:+74955895208">+7 (499) 589-52-08</a></p>
+          <p class="phone">
+            <a href="tel:+74959784023">+7 (495) 978-40-23</a>
+          </p>
+          <p class="phone">
+            <a href="tel:+74955895208">+7 (499) 589-52-08</a>
+          </p>
           <p class="email">
             <a href="mailto:9784023@gmail.com">9784023@gmail.com</a>
           </p>
@@ -39,7 +47,7 @@
 </style>
 <script>
 import { defineComponent } from "vue";
-import { mapGetters, mapState, mapMutations } from "vuex";
+import { mapGetters, mapState, mapMutations, mapActions } from "vuex";
 import { Link } from "@inertiajs/inertia-vue3";
 import AppLogo from "@/9784023/Fragments/Logo.vue";
 import SliderCource from "@/9784023/Fragments/SliderCource.vue";
@@ -51,16 +59,19 @@ export default defineComponent({
     AppLogo,
   },
   mounted() {
-    this.$store.dispatch("getCources");
+    this.getCources();
   },
   methods: {
-    ...mapMutations({
-      SelectCource: "SET_ACTIVE_COURCES", // map `this.add()` to `this.$store.commit('increment')`
+    ...mapMutations('slider', {
+      SelectCource: "SET_ACTIVE_COURCES",
     }),
+    ...mapActions('slider', ['getCources']),
   },
   computed: {
-    ...mapGetters(["active_cource"]),
-    ...mapState({ cources: "cources" }),
+    ...mapGetters('slider', ["active_cource"]),
+    ...mapState({
+      cources: (state) => state.slider.cources,
+    }),
   },
 });
 </script>
