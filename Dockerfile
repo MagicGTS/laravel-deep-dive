@@ -1,4 +1,4 @@
-FROM library/centos:latest
+FROM library/rockylinux:latest
 
 LABEL org.opencontainers.image.title="GekBrains Laravel Deep Dive (Nginx, PHP-FPM, MySQL)" \
     org.opencontainers.image.authors="Andrey Leshkevich <magicgts@gmail.com>" \
@@ -7,8 +7,6 @@ LABEL org.opencontainers.image.title="GekBrains Laravel Deep Dive (Nginx, PHP-FP
 
 
 RUN set -eux && \
-	sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &&\
-    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* && \
     dnf update -y && \
     dnf -y install epel-release && \
     REPOLIST="baseos,appstream,epel,extras" && \
@@ -89,7 +87,7 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream symfony/yaml && \
+    composer require laravel/jetstream symfony/yaml franzose/closure-table && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
