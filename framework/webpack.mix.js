@@ -18,6 +18,9 @@ mix.js('resources/js/app.js', 'public/js').vue()
     ]).sourceMaps(true, 'source-map') 
     .vue()
     .webpackConfig(require('./webpack.config'));
+mix.webpackConfig({
+    devtool: 'inline-source-map'
+});
 mix.copy('resources/img', 'public/img', false);
 if (mix.inProduction()) {
     mix.version();

@@ -1,0 +1,56 @@
+@import (less) "~css/common.less";
+@import (less) "~css/colors.less";
+.cource-small-card {
+    width: 15.9rem;
+    height: 16.1em;
+    border-radius: 0.5rem;
+    padding: 2em 1.2rem 1em 1.2rem;
+    background-color: @color_04;
+    &__content {
+        height: 10.8em;
+    }
+    &__title {
+        .fonts(1.75rem; 2.075rem; 700);
+        color: @color_white;
+        text-transform: uppercase;
+    }
+    &__icon {
+        color: @color_white;
+    }
+    &__desc {
+        color: @color_white;
+        .fonts(1em; 1.1875rem; 400);
+    }
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 0.5em;
+    }
+
+    & .btn-sqr2_dl {
+        border-style: solid;
+        border-color: @color_white;
+        border-width: 0.001rem;
+        border-radius: 0.4rem;
+        &:hover {
+            transition: 500ms;
+            background-color: @color_04;
+        }
+        &__link {
+            .fonts(0.875rem;1.125rem;500);
+            border-radius: 0.4rem;
+            color: @color_white;
+            padding: 0.5em;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    &:hover {
+        box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
+            0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+        transition: 500ms;
+        background-color: @color_06;
+    }
+}
