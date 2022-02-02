@@ -7,6 +7,8 @@ LABEL org.opencontainers.image.title="GekBrains Laravel Deep Dive (Nginx, PHP-FP
 
 
 RUN set -eux && \
+	sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &&\
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* && \
     dnf update -y && \
     dnf -y install epel-release && \
     REPOLIST="baseos,appstream,epel,extras" && \
