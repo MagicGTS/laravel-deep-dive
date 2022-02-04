@@ -3,6 +3,7 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import VueLazyload from '@jambonn/vue-lazyload'
 import store from './store/index';
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -13,6 +14,12 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(store)
             .use(plugin)
+            .use(VueLazyload, {
+                preLoad: 1.3,
+                error: './img/error.png',
+                loading: './img/loading.gif',
+                attempt: 1
+            })
             .mixin({ methods: { route } })
             .mount(el);
     },

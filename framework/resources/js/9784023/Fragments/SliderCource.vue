@@ -3,7 +3,7 @@
   <div class="slider__img">
     <Link :href="route(cource.component)">
       <img
-        :src="cource.img.src"
+        v-lazy="cource.img.src"
         alt=""
         :style="style"
     /></Link>
