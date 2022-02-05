@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cource;
 use App\Models\ImageList;
 use Illuminate\Http\Request;
-use Symfony\Component\Yaml\Yaml;
 
 class QuickCourcesController extends Controller
 {
@@ -13,7 +12,6 @@ class QuickCourcesController extends Controller
     {
 		// TODO Разобраться с запросом дочерних моделей через pivot синтаксис, выбирать нужные поля непосредственно с помощью БД
 		//  Форкнуть репу с ClosureTable и исправить функциональность
-        $yamlCources = Yaml::parse(file_get_contents(base_path() . '/resources/js/QuickCources.yaml'));
         $cources_array = [];
         $cources = Cource::find(1)->getDescendants()->where('isLeaf', 1);
         foreach ($cources as &$cource) {

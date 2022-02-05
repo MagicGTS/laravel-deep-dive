@@ -36,9 +36,9 @@ if [ -f "/opt/framework/.firstrun" ]; then
     echo "######################init################################"
     /usr/bin/mysql_install_db --auth-root-authentication-method=normal
     /usr/bin/mysqld_safe --socket /tmp/mysql &
+	composer dump-autoload
     npm run dev
     php artisan migrate
-	composer dump-autoload
     /usr/bin/mysqladmin -u root --protocol=SOCKET --socket=/tmp/mysql shutdown
     rm -f /opt/framework/.firstrun
 fi

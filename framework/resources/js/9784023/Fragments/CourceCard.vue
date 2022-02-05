@@ -3,17 +3,20 @@
         <div class="cource-small-card__content">
             <div class="cource-small-card__top">
                 <div class="cource-small-card__title">{{ title }}</div>
-                <div class="cource-small-card__icon"  :style="style">
-                    <img :src="img.path" />
+                <div class="cource-small-card__icon" :style="style">
+                    <img v-if="img.mime != 'image/svg'" :src="img.path" />
+                    <svg v-else>
+                        <use v-bind="{ 'xlink:href': (img.path + '#icon') }" />
+                    </svg>
                 </div>
             </div>
             <div class="cource-small-card__desc">{{ description }}</div>
         </div>
         <div class="btn-sqr2_dl">
-            <a href class="btn-sqr2_dl__link">
+            <Link :href="route('Cource', { slug: slug })" class="btn-sqr2_dl__link">
                 <span class="btn-sqr2_dl__text"></span>
                 {{ buttontText }}
-            </a>
+            </Link>
         </div>
     </section>
 </template>
@@ -30,7 +33,7 @@ export default defineComponent({
     components: {
         Link,
     },
-    props: ["href", "active", "title", "img", "description", "btn_text"],
+    props: ["href", "active", "title", "img", "description", "btn_text", "slug"],
     computed: {
         classes() {
             return this.active
