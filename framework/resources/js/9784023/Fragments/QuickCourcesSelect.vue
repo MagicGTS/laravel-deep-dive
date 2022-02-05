@@ -10,6 +10,7 @@
                         :img="item.images.icon"
                         :description="item.description"
                         :btn_text="item.btn_text"
+                        :slug="item.slug"
                     />
                 </li>
             </ul>

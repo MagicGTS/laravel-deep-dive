@@ -12,7 +12,7 @@
       />
       <a :href="route('Index')" @click.prevent="submit" :class="classes"
         ><svg width="1.125rem" height="1.125rem">
-          <use xlink:href="img/message.svg#message" /></svg
+          <use xlink:href="/img/message.svg#message" /></svg
       ></a>
     </form>
   </section>

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class NewsSubscriptionController extends Controller
@@ -18,29 +19,36 @@ class NewsSubscriptionController extends Controller
      */
     public function subscribe(Request $request)
     {
-        //sleep(5);
-        $email = $request->input('email');
-        $now = Carbon::now();
-        $subscription = NewsSubscription::firstWhere('email', $email);
-        $token = hash('sha256', $plainTextToken = Str::random(64));
-        if ($subscription === null) {
-            $subscription = NewsSubscription::create([
-                'email' => $email,
-                'last_verify_request_at' => $now,
-                'token' => $token,
-            ]);
-            Session::flash('message', "Запрос на подписку отправлен на ваш адрес: ${email}.");
-            return Redirect::back();
-        } elseif ($now->diffInHours($subscription->last_verify_request_at) > 2) {
-            $subscription->last_verify_request_at = $now;
-            $subscription->token = $token;
-            $subscription->save();
-            Session::flash('message', "Повторный запрос на подписку отправлен на ваш адрес: ${email}.");
-            return Redirect::back();
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'regex:/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/'],
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors(['message' => "Что-то пошло не так."]);
+
         } else {
-            return Redirect::back()->withErrors(['message' => "Недавно вы уже отправляли запрос, попробуйте позже."]);
+            $email = $request->input('email');
+            $now = Carbon::now();
+            $subscription = NewsSubscription::firstWhere('email', $email);
+            $token = hash('sha256', $plainTextToken = Str::random(64));
+            if ($subscription === null) {
+                $subscription = NewsSubscription::create([
+                    'email' => $email,
+                    'last_verify_request_at' => $now,
+                    'token' => $token,
+                ]);
+                Session::flash('message', "Запрос на подписку отправлен на ваш адрес: ${email}.");
+                return Redirect::back();
+            } elseif ($now->diffInHours($subscription->last_verify_request_at) > 2) {
+                $subscription->last_verify_request_at = $now;
+                $subscription->token = $token;
+                $subscription->save();
+                Session::flash('message', "Повторный запрос на подписку отправлен на ваш адрес: ${email}.");
+                return Redirect::back();
+            } else {
+                return Redirect::back()->withErrors(['message' => "Недавно вы уже отправляли запрос, попробуйте позже."]);
+            }
         }
-        return Redirect::back()->withErrors(['message' => "Что-то пошло не так."]);
+
     }
 
     /**

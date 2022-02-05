@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsSubscriptionController;
+use App\Http\Controllers\CourceController;
 use Inertia\Inertia;
 use Symfony\Component\Yaml\Yaml;
 
@@ -41,6 +42,8 @@ foreach ($menu as $item) {
         ]);
     })->name($item['component']);
 }
+
+Route::get('/cource/{slug}', [CourceController::class, 'index'])->name('Cource');
 
 Route::get('/location', function () {
     return Inertia::render('Index', [

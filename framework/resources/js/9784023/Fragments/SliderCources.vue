@@ -2,7 +2,8 @@
   <section
     class="slider-course"
     v-if="cources.isLoaded"
-    :style="{ backgroundImage: `url(${active_cource.background})` }"
+    v-lazy:background-image="active_cource.background"
+    
   >
     <div class="slider-course-wrap wrap padding-global">
       <section class="slider-course__header">
