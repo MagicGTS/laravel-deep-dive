@@ -20,12 +20,12 @@ class CourcesSeeder extends Seeder
 
         $images = [
             new Image([
-                'path' => 'img/ico_ОХРАНА ТРУДА.svg',
-                'mime' => 'image/svg',
+                'path' => 'img/ico_ОХРАНА ТРУДА.png',
+                'mime' => 'image/png',
             ]),
             new Image([
-                'path' => 'img/ico_ПТМ.svg',
-                'mime' => 'image/svg',
+                'path' => 'img/ico_ПТМ.png',
+                'mime' => 'image/png',
             ]),
             new Image([
                 'path' => 'img/ico_ПТЭЭП.svg',

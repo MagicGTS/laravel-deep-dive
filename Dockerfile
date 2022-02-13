@@ -87,7 +87,7 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream symfony/yaml franzose/closure-table && \
+    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
