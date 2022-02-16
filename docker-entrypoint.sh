@@ -16,9 +16,9 @@ fi
 # Web interface www-root directory
 WWW_ROOT="/opt/framework"
 
-sed -i "s/^\s*;\?\s*xdebug\.client_host\s*=.*/xdebug.client_host = ${CLIENT_HOST}/g" /etc/opt/remi/php74/php.d/15-xdebug.ini
+sed -i "s/^\s*;\?\s*xdebug\.client_host\s*=.*/xdebug.client_host = ${CLIENT_HOST}/g" /etc/opt/remi/php81/php.d/15-xdebug.ini
 sed -i "s/^\s*mix\s*\.\s*browserSync.*$/mix.browserSync({ host: '${CONTAINER_HOST}', proxy: '${CLIENT_HOST}', port: 3000, open: false, });/g" /opt/framework/webpack.mix.js
-sed -i "s/^\s*APP_URL\s*=.*$/APP_URL=http:\/\/${CONTAINER_HOST}/g" /opt/framework/.env
+sed -i "s/^\s*APP_URL\s*=.*$/APP_URL=https:\/\/${CONTAINER_HOST}/g" /opt/framework/.env
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "######################DB################################"

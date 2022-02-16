@@ -41,29 +41,29 @@ RUN set -eux && \
     groupadd -g 1000 -r nginx && \
     useradd -u 1000 -r -g nginx -G root -s /sbin/nologin -d /var/cache/nginx -c "nginx user"  nginx && \
     dnf module reset php nodejs && \
-    dnf module install php:remi-7.4 nginx:1.20 nodejs:12 -y && \
+    dnf module install php:remi-8.1 nginx:1.20 nodejs:12 -y && \
     REPOLIST="baseos,appstream,epel,mariadb-main,extras,remi-modular,remi-safe" && \
     INSTALL_PKGS="nginx \
-    php74-php-bcmath \
-    php74-php-cli \
-    php74-php-dba \
-    php74-php-fpm \
-    php74-php-gd \
-    php74-php-imap \
-    php74-php-intl \
-    php74-php-json \
-    php74-php-ldap \
-    php74-php-mbstring \
-    php74-php-mysqlnd \
-    php74-php-pdo \
-    php74-php-pear \
-    php74-php-pecl-apcu \
-    php74-php-pecl-mcrypt \
-    php74-php-pecl-memcached \
-    php74-php-xml \
-    php74-php-xmlrpc \
-    php74-php-opcache \
-    php74-php-pecl-xdebug3 \
+    php81-php-bcmath \
+    php81-php-cli \
+    php81-php-dba \
+    php81-php-fpm \
+    php81-php-gd \
+    php81-php-imap \
+    php81-php-intl \
+    php81-php-json \
+    php81-php-ldap \
+    php81-php-mbstring \
+    php81-php-mysqlnd \
+    php81-php-pdo \
+    php81-php-pear \
+    php81-php-pecl-apcu \
+    php81-php-pecl-mcrypt \
+    php81-php-pecl-memcached \
+    php81-php-xml \
+    php81-php-xmlrpc \
+    php81-php-opcache \
+    php81-php-pecl-xdebug3 \
     composer \
     php-mysqlnd \
     boost-program-options \
@@ -87,7 +87,7 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream symfony/yaml franzose/closure-table && \
+    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
@@ -102,7 +102,7 @@ RUN set -eux && \
     chmod -R g=u /var/lib/php/{session,wsdlcache}/ && \    
     rm -f /etc/nginx/conf.d/php-fpm.conf /etc/nginx/default.d/php.conf /etc/nginx/nginx.conf && \
     rm -f /etc/php-fpm.d/www.conf && \
-    rm -f /etc/opt/remi/php74/php-fpm.d/www.conf /etc/opt/remi/php74/{php.ini,php-fpm.conf} /etc/opt/remi/php74/php.d/15-xdebug.ini && \
+    rm -f /etc/opt/remi/php81/php-fpm.d/www.conf /etc/opt/remi/php81/{php.ini,php-fpm.conf} /etc/opt/remi/php81/php.d/15-xdebug.ini && \
     rm -f /etc/php-fpm.conf && \
     rm -rf /var/lib/mysql/* && \
     chown --quiet -R nginx. /var/lib/mysql

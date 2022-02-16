@@ -1,6 +1,6 @@
 <template>
-  <app-layout :title="title" :display="display" :menu="menu">
-    <template #header> </template>
+  <app-layout :title="title" :display="display" :menu="menu" :canLogin="canLogin" :canRegister="canRegister">
+    <template #header > </template>
     <slider-cources/>
     <quick-cources-select/>
   </app-layout>
@@ -17,6 +17,8 @@ export default defineComponent({
     title: String,
     display: String,
     menu: Array,
+    canLogin: Boolean,
+    canRegister: Boolean,
   },
   components: {
     AppLayout,
