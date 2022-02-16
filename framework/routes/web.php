@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\Yaml\Yaml;
-
+use App\Http\Controllers\Admin\NewsParserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +65,9 @@ Route::get('/stub', function () {
 /* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard'); */
+Route::group(['prefix' => 'admin', 'name'=>'admin.', 'middleware' => ['auth:sanctum', 'verified','admin']],function () {
+    Route::get('parse', [NewsParserController::class, 'parse'])->name('Parse');
+});
 
 Route::post('/emailnewssubscribe', [NewsSubscriptionController::class, 'subscribe'])->name('emailnewssubscribe');
 
