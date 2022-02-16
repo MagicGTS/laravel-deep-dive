@@ -1,6 +1,6 @@
 <template>
   <Head :title="title" :display="display" />
-  <Header :menu="menu" />
+  <Header :menu="menu" :canLogin="canLogin" :canRegister="canRegister"/>
   <main>
     <slot></slot>
   </main>
@@ -19,6 +19,8 @@ export default defineComponent({
     title: String,
     display: String,
     menu: Array,
+    canLogin: Boolean,
+    canRegister: Boolean,
   },
 
   components: {

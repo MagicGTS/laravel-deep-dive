@@ -2,13 +2,12 @@
 
 use App\Http\Controllers\CourceController;
 use App\Http\Controllers\NewsSubscriptionController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\Yaml\Yaml;
-use App\Models\User;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +30,8 @@ foreach ($menu as $item) {
             'title' => $item['title'],
             'menu' => $menu,
             'display' => array_key_exists('display', $item) ? $item['display'] : $item['title'],
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
         ]);
     })->name($item['component']);
 }
@@ -60,14 +61,16 @@ Route::get('/stub', function () {
         'title' => "Не реализовано",
     ]);
 })->name('Stub');
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+/* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->name('dashboard');
+})->name('dashboard'); */
+
 Route::post('/emailnewssubscribe', [NewsSubscriptionController::class, 'subscribe'])->name('emailnewssubscribe');
 
 Route::get('/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
-});
+})->name('Google-redirect');
 
 Route::get('/auth/callback', function () {
     $googleUser = Socialite::driver('google')->user();
@@ -80,7 +83,7 @@ Route::get('/auth/callback', function () {
             'google_refresh_token' => $googleUser->refreshToken,
         ]);
     } else {
-        $user = User::create([
+        $user = User::updateOrCreate([
             'name' => $googleUser->name,
             'email' => $googleUser->email,
             'google_id' => $googleUser->id,
@@ -91,7 +94,7 @@ Route::get('/auth/callback', function () {
 
     Auth::login($user);
 
-    return redirect('/dashboard');
+    return redirect('/');
 
     // $user->token
-});
+})->name('Google-callback');
