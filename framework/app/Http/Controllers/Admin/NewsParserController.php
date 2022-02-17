@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+use Symfony\Component\Yaml\Yaml;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class NewsParserController extends Controller
@@ -21,7 +23,6 @@ class NewsParserController extends Controller
         ]);
         if ($validator->fails()) {
             return Redirect::route('Index')->withErrors(['message' => "Что-то пошло не так."]);
-
         } else {
             $rss = null;
             switch ($request->source) {
@@ -59,6 +60,97 @@ class NewsParserController extends Controller
             }
             return response()->json(["raw" => ($rss === null) ? [] : $rss]);
         }
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $yamlMenu = Yaml::parse(file_get_contents(base_path() . '/resources/js/menu.yaml'));
+        $menu = [];
+        YamlRouteList($yamlMenu, $menu);
+        $news = NewsExternal::get(['guid', 'title', 'category']);
+        return Inertia::render('AdminNewsList', [
+            'title' => 'Редактор',
+            'menu' => $menu,
+            'news' => $news,
+        ]);
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Illuminate\Http\Request  $newsSubscription
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  Illuminate\Http\Request  $newsSubscription
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request)
+    {
+        $validator = Validator::make(['guid' => $request->guid], [
+            'guid' => ['required', 'max:60'],
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors(['message' => "Что-то пошло не так."]);
+        } else {
+            $yamlMenu = Yaml::parse(file_get_contents(base_path() . '/resources/js/menu.yaml'));
+            $menu = [];
+            YamlRouteList($yamlMenu, $menu);
+            $news = NewsExternal::where('guid', $request->guid)->first();
+            if ($news) {
+                return Inertia::render('AdminNewsEditor', [
+                    'title' => 'Редактор',
+                    'menu' => $menu,
+                    'news' => $news,
+                ]);
+            } else {
+                return Redirect::route('NewsList')->withErrors(['message' => "Что-то пошло не так."]);
+            }
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @param  App\Models\NewsExternal  $newsSubscription
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, NewsExternal $newsExternal)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Illuminate\Http\Request  $newsSubscription
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        //
     }
 }
