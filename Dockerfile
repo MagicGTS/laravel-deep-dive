@@ -91,7 +91,7 @@ RUN set -eux && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
-    npm install vuex@next --save && \
+    npm install vuex@next @vueup/vue-quill@beta --save && \
     npm install axios @jambonn/vue-lazyload && \
     npm install -D less less-loader laravel-mix-alias && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
