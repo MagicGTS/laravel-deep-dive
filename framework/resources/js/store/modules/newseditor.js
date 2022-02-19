@@ -1,6 +1,5 @@
 const state = () => ({
-  loaded: false,
-  news: { content: '', isLoaded: false },
+  news: { content: 'gggg', isLoaded: false },
 });
 
 let mutations = {
@@ -10,8 +9,14 @@ let mutations = {
     }
   }
 }
+let actions = {
+  UpdateNews(context) {
+    axios.post('/admin/newsedit', { news: context.state.news.content })
+  }
+}
 export default {
   namespaced: true,
   state,
-  mutations
+  mutations,
+  actions
 }

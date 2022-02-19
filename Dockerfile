@@ -87,12 +87,12 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite && \
+    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite orchestra/parser && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
-    npm install vuex@next @vueup/vue-quill@beta --save && \
-    npm install axios @jambonn/vue-lazyload && \
+    npm install vuex@next @vueblocks/vue-use-core @vueup/vue-quill@beta --save && \
+    npm install axios @jambonn/vue-lazyload&& \
     npm install -D less less-loader laravel-mix-alias && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
     touch /opt/framework/.firstrun && \

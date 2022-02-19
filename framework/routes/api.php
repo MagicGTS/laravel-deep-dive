@@ -3,6 +3,7 @@
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\CourcesController;
 use App\Http\Controllers\QuickCourcesController;
+use App\Http\Controllers\Admin\NewsParserController;
 
 use Illuminate\Http\Request;
 
@@ -24,7 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('sitemap', [SitemapController::class, 'index']);
 Route::get('cources', [CourcesController::class, 'index']);
 Route::get('quickcources', [QuickCourcesController::class, 'index']);
-
-
 
 //Route::get('phpinfo', [PhpinfoController::class, 'show']);

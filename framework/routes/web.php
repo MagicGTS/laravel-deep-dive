@@ -65,8 +65,12 @@ Route::get('/stub', function () {
 /* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard'); */
-Route::group(['prefix' => 'admin', 'name'=>'admin.', 'middleware' => ['auth:sanctum', 'verified','admin']],function () {
+Route::group(['prefix' => 'admin', 'name'=>'Admin.', 'middleware' => ['auth:sanctum', 'verified','admin']],function () {
     Route::get('parse', [NewsParserController::class, 'parse'])->name('Parse');
+    
+    Route::get('newseditor/{guid}', [NewsParserController::class, 'edit'])->name('NewsEditor');
+    Route::get('newslist', [NewsParserController::class, 'index'])->name('NewsList');
+    Route::post('newsedit', [NewsParserController::class, 'update'])->name('NewsUpdate');
 });
 
 Route::post('/emailnewssubscribe', [NewsSubscriptionController::class, 'subscribe'])->name('emailnewssubscribe');

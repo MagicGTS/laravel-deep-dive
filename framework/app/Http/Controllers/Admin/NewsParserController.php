@@ -11,8 +11,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
-use Symfony\Component\Yaml\Yaml;
 use Orchestra\Parser\Xml\Facade as XmlParser;
+use Symfony\Component\Yaml\Yaml;
 
 class NewsParserController extends Controller
 {
@@ -50,10 +50,10 @@ class NewsParserController extends Controller
                         if ($item === null) {
                             $item = new NewsExternal($item_arr);
                             $item->topic()->associate($topic);
+                            $item->save();
                         } else {
                             $item->update($item_arr);
                         }
-                        $item->save();
                     }
 
                     break;
@@ -98,7 +98,7 @@ class NewsParserController extends Controller
      */
     public function show(Request $request)
     {
-        //
+
     }
 
     /**
@@ -129,6 +129,7 @@ class NewsParserController extends Controller
                 return Redirect::route('NewsList')->withErrors(['message' => "Что-то пошло не так."]);
             }
         }
+
     }
 
     /**
@@ -138,9 +139,40 @@ class NewsParserController extends Controller
      * @param  App\Models\NewsExternal  $newsSubscription
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NewsExternal $newsExternal)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'news.id' => ['required', 'digits_between:1,20'],
+            'news.news_topic_external_id' => ['required', 'digits_between:1,20'],
+            'news.title' => ['required', 'string'],
+            'news.description' => ['required', 'string'],
+            'news.link' => ['required', 'string'],
+            'news.category' => ['required', 'string'],
+            'news.guid' => ['required', 'string'],
+            'news.pubDate' => ['required', 'string'],
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors(['message' => "Что-то пошло не так."]);
+
+        } else {
+
+            $yamlMenu = Yaml::parse(file_get_contents(base_path() . '/resources/js/menu.yaml'));
+            $menu = [];
+            YamlRouteList($yamlMenu, $menu);
+            $news = NewsExternal::where('guid', $request->news['guid'])->first();
+            if ($news) {
+                $news->update($request->news);
+
+                return Inertia::render('AdminNewsEditor', [
+                    'title' => 'Редактор',
+                    'menu' => $menu,
+                    'news' => $news,
+                ]);
+            } else {
+                return Redirect::route('NewsList')->withErrors(['message' => "Что-то пошло не так."]);
+            }
+
+        }
     }
 
     /**
