@@ -64,6 +64,8 @@ RUN set -eux && \
     php81-php-xmlrpc \
     php81-php-opcache \
     php81-php-pecl-xdebug3 \
+	php81-php-phpiredis \
+	redis \
     composer \
     php-mysqlnd \
     boost-program-options \
@@ -87,7 +89,7 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite orchestra/parser && \
+    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite orchestra/parser predis/predis && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
@@ -95,8 +97,9 @@ RUN set -eux && \
     npm install axios @jambonn/vue-lazyload&& \
     npm install -D less less-loader laravel-mix-alias && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
+	sed -i "s/logfile \/var\/log\/redis\/redis\.log/logfile \/dev\/stdout/g" /etc/redis.conf && \
     touch /opt/framework/.firstrun && \
-    chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun /var/cache/nginx && \
+    chown --quiet -R nginx:root /var/lib/php/{session,wsdlcache}/ /opt/framework /opt/framework/.firstrun /var/cache/nginx /var/lib/redis && \
     rm -rf /var/lib/mysql/* && \
     chgrp -R 0 /var/lib/php/{session,wsdlcache}/ && \
     chmod -R g=u /var/lib/php/{session,wsdlcache}/ && \    

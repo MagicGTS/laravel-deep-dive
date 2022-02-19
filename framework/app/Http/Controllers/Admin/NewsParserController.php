@@ -4,19 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\NewsExternal;
-use App\Models\NewsTopicExternal;
-use Carbon\Carbon;
+use App\Services\XMLParserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
-use Orchestra\Parser\Xml\Facade as XmlParser;
 use Symfony\Component\Yaml\Yaml;
-
+use  App\Jobs\NewsParsing;
 class NewsParserController extends Controller
 {
-    public function parse(Request $request)
+    public function parse(Request $request, XMLParserService $parseService)
     {
         $validator = Validator::make(['source' => $request->source], [
             'source' => ['required', 'max:60'],
@@ -25,40 +22,16 @@ class NewsParserController extends Controller
             return Redirect::route('Index')->withErrors(['message' => "Что-то пошло не так."]);
         } else {
             $rss = null;
+            $start = date('c');
             switch ($request->source) {
                 case 'mintrud':
-                    $xml = XmlParser::load(base_path() . '/resources/js/official.rss');
-                    $rss = $xml->parse([
-                        'title' => [
-                            'uses' => 'channel.title',
-                        ],
-                        'link' => [
-                            'uses' => 'channel.link',
-                        ],
-                        'description' => [
-                            'uses' => 'channel.description',
-                        ],
-                        'items' => [
-                            'uses' => 'channel.item[title,link,category,description,guid,pubDate]',
-                        ],
-                    ]);
-                    $topic = NewsTopicExternal::updateOrCreate(Arr::except($rss, ['items']));
-                    $topic->save();
-                    foreach ($rss['items'] as $item_arr) {
-                        $item_arr['pubDate'] = Carbon::createFromFormat('D, d M Y H:i:s P', $item_arr['pubDate']); //Wed, 16 Feb 2022 13:10:37 +0000
-                        $item = NewsExternal::where('guid', '=', $item_arr['guid'])->first();
-                        if ($item === null) {
-                            $item = new NewsExternal($item_arr);
-                            $item->topic()->associate($topic);
-                            $item->save();
-                        } else {
-                            $item->update($item_arr);
-                        }
-                    }
+                    NewsParsing::dispatch('https://mintrud.gov.ru/news/rss/official');
+                    //$rss = $parseService->saveNews(base_path() . '/resources/js/official.rss');
 
                     break;
             }
-            return response()->json(["raw" => ($rss === null) ? [] : $rss]);
+            //return response()->json(["raw" => ($rss === null) ? [] : $rss]);
+            return response()->json(["start" => $start, "end"=>date('c')]);
         }
     }
     /**
