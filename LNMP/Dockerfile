@@ -52,4 +52,11 @@ RUN set -eux && \
     ${INSTALL_PKGS} && \
     dnf -y clean all && \
     rm -rf /var/cache/yum /var/lib/yum/yumdb/* /usr/lib/udev/hwdb.d/* && \
-    rm -rf /var/cache/dnf /etc/udev/hwdb.bin /root/.pki
+    rm -rf /var/cache/dnf /etc/udev/hwdb.bin /root/.pki && \
+    rm -rf /etc/{php.d,php-fpm.d,php.ini,php-fpm.conf} /usr/bin/php* && \
+    for i in php.ini php.d php-fpm.conf php-fpm.d; do ln -s /etc/opt/remi/php81/$i /etc/$i; done && \
+    for i in php php-cgi phpize; do ln -s /opt/remi/php81/root/bin/$i /usr/bin/$i; done && \
+    ln -s /opt/remi/php81/root/bin/php /usr/bin/php81 && \
+    ln -s /opt/remi/php81/root/bin/php-cgi /usr/bin/php81-cgi  && \
+    ln -s /opt/remi/php81/root/bin/pear /usr/bin/php81-pear  && \
+    ln -s /opt/remi/php81/root/bin/phar /usr/bin/php81-phar
