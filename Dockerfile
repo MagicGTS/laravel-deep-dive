@@ -1,86 +1,11 @@
-FROM library/rockylinux:latest
+FROM localhost/lnmp:latest
 
 LABEL org.opencontainers.image.title="GekBrains Laravel Deep Dive (Nginx, PHP-FPM, MySQL)" \
     org.opencontainers.image.authors="Andrey Leshkevich <magicgts@gmail.com>" \
     org.opencontainers.image.description="Web appliance for learning Laravel Framework" \
     org.opencontainers.image.version="0.8"
 
-
 RUN set -eux && \
-    dnf update -y && \
-    dnf -y install epel-release && \
-    REPOLIST="baseos,appstream,epel,extras" && \
-    INSTALL_PKGS="curl \
-    bash-completion \
-    nano \
-    less \
-    python3 \
-    supervisor \
-    findutils \
-    glibc-locale-source \
-    curl \
-    unzip \
-    boost-program-options \
-    yum-utils" && \
-    dnf -y install \
-    --disablerepo "*" \
-    --enablerepo "${REPOLIST}" \
-    --setopt=tsflags=nodocs \
-    --setopt=install_weak_deps=False \
-    --best \
-    ${INSTALL_PKGS} && \
-    dnf -y clean all && \
-    rm -rf /var/cache/yum /var/lib/yum/yumdb/* /usr/lib/udev/hwdb.d/* && \
-    rm -rf /var/cache/dnf /etc/udev/hwdb.bin /root/.pki
-
-RUN set -eux && \
-    dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y && \
-    curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash && \
-    dnf upgrade -y && \
-    dnf update -y && \
-    groupadd -g 1000 -r nginx && \
-    useradd -u 1000 -r -g nginx -G root -s /sbin/nologin -d /var/cache/nginx -c "nginx user"  nginx && \
-    dnf module reset php nodejs && \
-    dnf module install php:remi-8.1 nginx:1.20 nodejs:12 -y && \
-    REPOLIST="baseos,appstream,epel,mariadb-main,extras,remi-modular,remi-safe" && \
-    INSTALL_PKGS="nginx \
-    php81-php-bcmath \
-    php81-php-cli \
-    php81-php-dba \
-    php81-php-fpm \
-    php81-php-gd \
-    php81-php-imap \
-    php81-php-intl \
-    php81-php-json \
-    php81-php-ldap \
-    php81-php-mbstring \
-    php81-php-mysqlnd \
-    php81-php-pdo \
-    php81-php-pear \
-    php81-php-pecl-apcu \
-    php81-php-pecl-mcrypt \
-    php81-php-pecl-memcached \
-    php81-php-xml \
-    php81-php-xmlrpc \
-    php81-php-opcache \
-    php81-php-pecl-xdebug3 \
-	php81-php-phpiredis \
-	redis \
-    composer \
-    php-mysqlnd \
-    boost-program-options \
-    MariaDB-server \
-    MariaDB-client" && \
-    dnf -y install \
-    --disablerepo "*" \
-    --enablerepo "${REPOLIST}" \
-    --setopt=tsflags=nodocs \
-    --setopt=install_weak_deps=False \
-    --best \
-    ${INSTALL_PKGS} && \
-    dnf -y clean all && \
-    rm -rf /var/cache/yum /var/lib/yum/yumdb/* /usr/lib/udev/hwdb.d/* && \
-    rm -rf /var/cache/dnf /etc/udev/hwdb.bin /root/.pki && \
     touch /var/log/php-fpm.log && \
     chown --quiet -R nginx:root /etc/nginx/ /etc/php-fpm.d/ /etc/php-fpm.conf /var/log/php-fpm /var/log/php-fpm.log /var/log/nginx && \
     chgrp -R 0 /etc/nginx/ /etc/php-fpm.d/ /etc/php-fpm.conf && \
@@ -93,9 +18,7 @@ RUN set -eux && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
-    npm install vuex@next @vueblocks/vue-use-core @vueup/vue-quill@beta --save && \
-    npm install axios @jambonn/vue-lazyload&& \
-    npm install -D less less-loader laravel-mix-alias && \
+    npm install vuex@next @vueblocks/vue-use-core @vueup/vue-quill@beta axios @jambonn/vue-lazyload less less-loader laravel-mix-alias --save-prod && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
 	sed -i "s/logfile \/var\/log\/redis\/redis\.log/logfile \/dev\/stdout/g" /etc/redis.conf && \
     touch /opt/framework/.firstrun && \
