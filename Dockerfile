@@ -14,7 +14,7 @@ RUN set -eux && \
     mkdir -p /var/lib/php/session /opt/framework /var/cache/nginx && \
     composer create-project laravel/laravel /opt/framework && \
     cd /opt/framework && \
-    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite orchestra/parser predis/predis && \
+    composer require laravel/jetstream symfony/yaml franzose/closure-table laravel/socialite orchestra/parser predis/predis fruitcake/laravel-cors && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
