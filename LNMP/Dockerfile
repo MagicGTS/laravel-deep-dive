@@ -37,8 +37,11 @@ RUN set -eux && \
     php81-php-opcache \
     php81-php-pecl-xdebug3 \
 	php81-php-phpiredis \
-	redis \
+    php81-libzip \
+    php81-php-pecl-zip \
+    redis \
     composer \
+    git \
     php-mysqlnd \
     boost-program-options \
     MariaDB-server \
