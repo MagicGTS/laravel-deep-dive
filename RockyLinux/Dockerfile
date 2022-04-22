@@ -1,4 +1,5 @@
-FROM library/rockylinux:latest
+ARG CI_REGISTRY=docker.io/library
+FROM ${CI_REGISTRY}/rockylinux:latest
 
 LABEL org.opencontainers.image.title="RockyLinux Updated" \
     org.opencontainers.image.authors="Andrey Leshkevich <magicgts@gmail.com>" \

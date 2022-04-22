@@ -1,4 +1,6 @@
-FROM localhost/lnmp:latest
+ARG CI_REGISTRY=localhost
+ARG IMAGE_VERSION=latest
+FROM ${CI_REGISTRY}/lnmp:${IMAGE_VERSION}
 
 LABEL org.opencontainers.image.title="GekBrains Laravel Deep Dive (Nginx, PHP-FPM, MySQL)" \
     org.opencontainers.image.authors="Andrey Leshkevich <magicgts@gmail.com>" \
