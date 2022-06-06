@@ -20,7 +20,7 @@ RUN set -eux && \
 	composer require barryvdh/laravel-debugbar --dev && \
     php artisan jetstream:install inertia && \
     npm install && \
-    npm install vuex@next @vueblocks/vue-use-core @vueup/vue-quill@beta axios @jambonn/vue-lazyload less less-loader laravel-mix-alias @vueblocks/vue-use-vuex --save-prod && \
+    npm install vuex@next @vueblocks/vue-use-core @vueup/vue-quill@beta axios @jambonn/vue-lazyload less less-loader laravel-mix-alias @vueblocks/vue-use-vuex postcss-import vuex@next @inertiajs/inertia-vue3 @inertiajs/inertia @tailwindcss/forms --save-prod && \
     npm install browser-sync browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps && \
 	sed -i "s/logfile \/var\/log\/redis\/redis\.log/logfile \/dev\/stdout/g" /etc/redis.conf && \
     touch /opt/framework/.firstrun && \
